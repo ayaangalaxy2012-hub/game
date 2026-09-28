@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PIXEL BRAWL — Wesker vs Homelander</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div id="stage">
+    <canvas id="game" width="960" height="540"></canvas>
+
+    <!-- Main menu overlay -->
+    <div id="screen-menu" class="screen visible">
+      <div class="title-pixel">PIXEL BRAWL</div>
+      <div class="subtitle">Wesker vs Homelander • procedural pixel-art brawl</div>
+      <div class="menu-buttons">
+        <button id="btn-start" class="pbtn">▶ START</button>
+        <button id="btn-howto" class="pbtn ghost">HOW TO PLAY</button>
+      </div>
+      <div id="howto" class="howto hidden">
+        <p><b>A / D</b> — walk (P1) &nbsp; • &nbsp; <b>← / →</b> — walk (P2)</p>
+        <p><b>W / ↑</b> — jump &nbsp; • &nbsp; <b>S / ↓</b> — crouch (hold + move = sneak)</p>
+        <p><b>AA / DD</b> — backdash / forward dash (double-tap direction)</p>
+        <p><b>LMB / J</b> — light chain ×3 &nbsp; • &nbsp; <b>RMB / K</b> — Wesker: Cobra Strike • Homelander: grab-throw</p>
+        <p><b>E</b> — Wesker: Samurai Edge (instant burst shot with i-frames; fires from neutral, guard, dash, hitstun or mid-swing — sneak ducks it)</p>
+        <p><b>,</b> — P2 light &nbsp; • &nbsp; <b>.</b> — P2 heavy</p>
+        <p><b>Hold AWAY</b> — walk back, auto-guard in range &nbsp; • &nbsp; <b>S + AWAY</b> — crouch block</p>
+        <p>Overheads beat crouch-block • lows beat stand-block • mids stopped by either</p>
+        <p><b>L / /</b> — grab (P1 / P2): beats block, loses to strikes</p>
+        <p><b>Space / F / O</b> — Wesker: Jaguar (1) / Phantom (2) / Rage (3) — burst instantly from anywhere (mid-combo, stun, air, guard) with i-frames &nbsp; • &nbsp; P2 mirror: <b>;</b> / <b>'</b> / <b>P</b></p>
+        <p><b>Space / F / O</b> — Homelander: Laser (1) / Scream (2) / Rage (3) — crouch ducks the laser!</p>
+        <p><b>T / U</b> — grant rage level (P1 / P2 test hook)</p>
+        <p><b>H</b> — hitboxes &nbsp; • &nbsp; <b>R</b> — reset</p>
+      </div>
+      <div class="foot">Wesker vs Homelander • procedural pixel-art • no assets needed</div>
+    </div>
+
+    <!-- Character select overlay -->
+    <div id="screen-char" class="screen">
+      <div class="screen-title">CHOOSE YOUR FIGHTERS</div>
+      <div class="char-row">
+        <div class="char-card" id="p1-card">
+          <div class="slot-label">P1 (You)</div>
+          <div class="portrait" id="p1-portrait"></div>
+          <div class="char-name" id="p1-name">WESKER</div>
+          <div class="char-stats" id="p1-stats"></div>
+          <div class="char-btns">
+            <button class="pbtn small" data-p="1" data-c="wesker">WESKER</button>
+            <button class="pbtn small ghost" data-p="1" data-c="homelander">HOMELANDER</button>
+          </div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="char-card" id="p2-card">
+          <div class="slot-label">P2 (CPU preview dummy)</div>
+          <div class="portrait" id="p2-portrait"></div>
+          <div class="char-name" id="p2-name">HOMELANDER</div>
+          <div class="char-stats" id="p2-stats"></div>
+          <div class="char-btns">
+            <button class="pbtn small ghost" data-p="2" data-c="wesker">WESKER</button>
+            <button class="pbtn small" data-p="2" data-c="homelander">HOMELANDER</button>
+          </div>
+        </div>
+      </div>
+      <button id="btn-to-maps" class="pbtn">CONTINUE → MAPS</button>
+      <div class="diff-row">
+        <span class="slot-label">CPU:</span>
+        <button class="pbtn small ghost" data-diff="easy">EASY</button>
+        <button class="pbtn small" data-diff="medium">MEDIUM</button>
+        <button class="pbtn small ghost" data-diff="extreme">EXTREME</button>
+        <button class="pbtn small ghost" data-diff="2p">2P HUMAN</button>
+      </div>
+    </div>
+
+    <!-- Map select overlay -->
+    <div id="screen-map" class="screen">
+      <div class="screen-title">SELECT STAGE</div>
+      <div class="map-row">
+        <button class="map-card" data-m="forest"><span class="map-emoji">🌲</span>RUINED<br/>FOREST</button>
+        <button class="map-card" data-m="lab"><span class="map-emoji">🧪</span>UNDERGROUND<br/>LAB</button>
+        <button class="map-card" data-m="city"><span class="map-emoji">🏙️</span>OVERRUN<br/>CITY</button>
+        <button class="map-card random" data-m="random"><span class="map-emoji">🎲</span>RANDOM</button>
+      </div>
+      <div class="map-hint" id="map-hint">Pick a stage to enter the scene.</div>
+      <button id="btn-back-char" class="pbtn ghost">← BACK</button>
+    </div>
+
+    <!-- Fight HUD (canvas-drawn bars + small DOM toolbar) -->
+    <div id="fight-bar" class="hidden">
+      <span id="fight-label">PIXEL BRAWL</span>
+      <button id="btn-quit" class="pbtn small ghost">QUIT TO MENU</button>
+      <button id="btn-swap-map" class="pbtn small ghost">SWAP MAP (M)</button>
+    </div>
+  </div>
+  <div id="hint">LMB/J light • RMB/K heavy • E Samurai Edge • L grab • Space/F/O specials • T/U rage • H hitboxes • R reset • ESC menu</div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
